@@ -1,0 +1,80 @@
+<app-user-nav></app-user-nav>
+<body class="text-center">
+    <main class="form-flight">
+        <form [formGroup]="searchPNRForm" (ngSubmit)="SearchBookingDetails()">
+            <div class="row">
+    
+                <div class="searchByPNR col-md-4 col-md-offset-4">
+                    <h1 class="h3 fw-normal">Search By PNR</h1>
+
+                    <div class="col">
+                        <div class="help-block" *ngIf="searchPNRForm.controls.pnr.touched && searchPNRForm.controls.pnr.invalid">PNR is required.</div>
+                        <input type="text" class="form-control" id="pnr"  formControlName="pnr" placeholder="Enter PNR" >
+                    </div>
+
+                    <div class="col">
+                        <button class="btn btn-lg btn-success" [disabled]="searchPNRForm.invalid" type="submit">Search</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </main>
+</body>
+
+<div *ngIf="loadBooking&&loadPassenger" class="container">
+    <button class="btn btn-lg btn-success" (click)="convetToPDF()" type="button">Download PDF</button>
+    <div class="responsive-table" id="ticket-details">
+        <h2>Ticket Details</h2>
+        <div class="PNR">
+            <label>PNR : </label> {{bookings[0].pnr}}    
+        </div>
+
+        <div class="details">
+            <label>Airline :</label> {{bookings[0].airlineName}}
+        </div>
+        <div class="details">
+            <label>Flight Number :</label> {{bookings[0].flightNumber}}
+        </div>
+        <div class="details">
+            <label>Departure :</label> {{bookings[0].departure}}
+        </div>
+        <div class="details">
+            <label>Destination :</label> {{bookings[0].destination}}
+        </div>
+        <div class="details">
+            <label>Departure Date And Time :</label> Date {{bookings[0].departureDate.split('T')[0]}} Time {{bookings[0].departureDate.split('T')[1]}}
+        </div>
+        <div class="details">
+            <label>No of Ticket :</label> {{bookings[0].numberOfTickets}}
+        </div>
+        <div class="details">
+            <label>Travelling Cost :</label> {{travelCost}}
+        </div>
+
+        <div *ngFor="let passenger of passengers">
+            <hr>
+            <div class="PNR">
+                    <label>Seat Number :</label> {{passenger.seatNumber}}
+                </div>
+            <div class="details">
+                <label>Name :</label> {{passenger.name}}
+            </div>
+            <div class="details">
+                <label>Email :</label> {{passenger.email}}
+            </div>
+            <div class="details">
+                <label>Age :</label> {{passenger.age}}
+            </div>
+            <div class="details">
+                <label>Gender :</label> {{passenger.gender}}
+            </div>
+            <div class="details">
+                <label>Meals :</label> {{passenger.meals}}
+            </div>
+            <div class="details">
+                <label>Status :</label><p *ngIf="passenger.bookingStatus=='Booked'" class="booked">{{passenger.bookingStatus}}</p>
+                                        <p *ngIf="passenger.bookingStatus=='Canceled'" class="canceled">{{passenger.bookingStatus}}</p>         
+            </div>
+        </div>
+    </div>
+</div>

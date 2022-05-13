@@ -1,0 +1,74 @@
+<app-user-nav></app-user-nav>
+<body class="text-center">
+    <main class="form-flight">
+        <form [formGroup]="searchFlightForm" (ngSubmit)="searchFlight()">
+            <div class="row">
+    
+                <div class="searchFlight col-md-8 col-md-offset-2">
+                    <h1 class="h3 fw-normal">Search Flight</h1>
+                    
+                    <div class="row">
+                        <!-- <div class="col-md-2">
+                            <label for="departureDate">Departure Date</label>
+                        </div> -->
+
+                        <div class="col-md-3">
+                            <div class="help-block" *ngIf="searchFlightForm.controls.departureDate.touched && searchFlightForm.controls.departureDate.invalid">Departure Date is required.</div>
+                            <input type="text" class="form-control" id="departureDate"  formControlName="departureDate" min="{{today | date:'yyyy-MM-dd'}}"  placeholder="Departure Date" onfocus="(this.type='date')">
+                        </div>
+
+                        <div class="col-md-3">
+                                <div class="help-block" *ngIf="searchFlightForm.controls.returnDate.touched && searchFlightForm.controls.returnDate.invalid">Return Date is required.</div>
+                                <input type="text" class="form-control" id="returnDate"  formControlName="returnDate" min="{{today | date:'yyyy-MM-dd'}}" placeholder="Return Date" onfocus="(this.type='date')">
+                            </div>
+
+                        <div class="col-md-3">
+                            <div class="help-block" *ngIf="searchFlightForm.controls.from.touched && searchFlightForm.controls.from.invalid">From is required.</div>
+                            <input type="text" class="form-control" id="from"  formControlName="from" placeholder="From" >
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="help-block" *ngIf="searchFlightForm.controls.to.touched && searchFlightForm.controls.to.invalid"> To is required.</div>
+                            <input type="text" class="form-control" id="to"  formControlName="to" placeholder="To" >
+                        </div>
+                    
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2 col-md-offset-5">
+                            <button class="btn btn-lg btn-success" [disabled]="searchFlightForm.invalid" type="submit">Search</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </main>
+</body>
+
+<div *ngIf="displaySearch" class="container">
+    <h2>Flight List</h2>
+    <ul class="responsive-table">
+        <li class="table-header">
+            <div class="col col-1">Flight Number</div>
+            <div class="col col-1">Airline</div>
+            <div class="col col-1">Departure</div>
+            <div class="col col-1">Destination</div>
+            <div class="col col-1">Departure Time</div>
+            <div class="col col-1">Ticket Cost</div>
+            <div class="col col-1">Book</div>
+        </li>
+        <li class="table-row" *ngIf="flights==undefined"><div><h3>Loading Data..</h3></div></li>
+        <li class="table-row" *ngIf="flights.length==0"><div><h3>No Flight Found on Given Day.</h3></div></li>
+        <li class="table-row" *ngFor="let flight of flights">
+            <div class="col col-1" data-label="Filght Number">{{flight.flightNumber}}</div>
+            <div class="col col-1" data-label="Filght Number">{{getAirlineName(flight.airlineId)}}</div>
+            <div class="col col-1" data-label="Departure">{{flight.departure}}</div>
+            <div class="col col-1" data-label="Destination">{{flight.destination}}</div>
+            <div class="col col-1" *ngIf="flight.departureTime.minutes==0" data-label="Departure Time">{{flight.departureTime.hours}}:{{flight.departureTime.minutes}}0</div>
+            <div class="col col-1" *ngIf="flight.departureTime.minutes!=0" data-label="Departure Time">{{flight.departureTime.hours}}:{{flight.departureTime.minutes}}</div>
+            <div class="col col-1" data-label="Ticket Cost">{{flight.ticketCost}}</div>
+            <div class="col col-1" data-label="Book Ticket">
+                <button class="btn btn-lg btn-primary" (click)="bookTicket(flight.flightNumber,getAirlineName(flight.airlineId))">Book Ticket</button>
+            </div>
+        </li>
+    </ul>
+</div>

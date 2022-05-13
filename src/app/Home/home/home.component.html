@@ -1,0 +1,44 @@
+<app-home-nav></app-home-nav>
+<body class="text-center">
+    <main class="form-signin">
+        <form [formGroup]="loginForm" (ngSubmit)="login()">
+            <div class="row">
+
+              <div class="login col-md-4 col-md-offset-4">
+                <h1 class="h3 fw-normal">User Login</h1>
+                
+                <div class="row">
+                  <div class="col-md-8 col-md-offset-2">
+                    <div class="help-block" *ngIf="loginForm.controls.email.touched && loginForm.controls.email.invalid">Email is required.</div>
+                    <input type="text" class="form-control" id="email"  formControlName="email" placeholder="Email" >
+                  </div>
+                </div>
+                <br>
+                
+                <div class="row">
+                  <div class="col-md-8 col-md-offset-2">
+                    <div class="help-block" *ngIf="loginForm.controls.password.touched && loginForm.controls.password.invalid">Password is required.</div>
+                    <input type="password" class="form-control" id="password" formControlName="password"  placeholder="Password">
+                    <!-- <i class="bi bi-eye pull-right" id="toggle" (click)="showPassword()"></i> -->
+                  </div>
+                </div>
+                <br>
+                
+                <button class="btn btn-lg btn-success" [disabled]="loginForm.invalid" type="submit">SIGN IN</button>
+                <hr>
+
+                <br>
+
+                 <div class="row">
+                    <div class="col-md-8 col-md-offset-2">
+                        <div class="alert alert-danger" *ngIf="invalidCredentials">Invalid Credentials</div>
+                    </div>
+                </div>
+              
+              </div>
+            </div>
+          </form>
+        <br>
+        <h4>Don't have an account already?  <button class="btn btn-warning" type="button" routerLink="/registration">Register now</button></h4> 
+      </main>
+</body>

@@ -1,0 +1,40 @@
+<app-user-nav></app-user-nav>
+<div class="container">
+    <h2>Booking History</h2>
+    <ul class="responsive-table">
+        <li class="table-header">
+            <div class="col col-1">PNR</div>
+            <div class="col col-1">Airline</div>
+            <div class="col col-1">Flight Number</div>
+            <div class="col col-1">Departure</div>
+            <div class="col col-1">Destination</div>
+            <div class="col col-1">Depatute Date and Time</div>
+            <div class="col col-1">Number of Tickets</div>
+            <div class="col col-1">Ticket Cost</div>
+            <div class="col col-1">View Passengers</div>
+            <div class="col col-1">Cancel Ticket</div>
+        </li>
+        <li class="table-row" *ngIf="bookings==undefined"><div><h3>Loading Data..</h3></div></li>
+        <li class="table-row" *ngIf="bookings?.length==0"><div><h3>No Records Found.</h3></div></li>
+        <li class="table-row" *ngFor="let booking of bookings">
+            <div class="col col-1" data-label="PNR">{{booking.pnr}}</div>
+            <div class="col col-1" data-label="PNR">{{booking.airlineName}}</div>
+            <div class="col col-1" data-label="Flight Number">{{booking.flightNumber}}</div>
+            <div class="col col-1" data-label="Departure">{{booking.departure}}</div>
+            <div class="col col-1" data-label="Destination">{{booking.destination}}</div>
+            <div class="col col-1" data-label="Departure Date And Time">{{booking.departureDate.split('T')[0]}}  {{booking.departureDate.split('T')[1]}}</div>
+            <div class="col col-1" data-label="Number Of Tickets">{{booking.numberOfTickets}}</div>
+            <div class="col col-1" data-label="Ticket Cost">{{booking.ticketCost}}</div>
+            <div class="col col-1" data-label="View Details">
+                <button class="btn btn-lg btn-primary" (click)="viewTicketDetails(booking.pnr)">Details</button>
+            </div>
+            <div class="col col-1" data-label="View Details">
+                <button *ngIf="getTravelStatus(booking.departureDate); else cancel" class="btn btn-lg btn-danger"  disabled="true">Travelled</button>
+            <div>
+                <button #cancel *ngIf="booking.numberOfTickets==0&&!(getTravelStatus(booking.departureDate))" class="btn btn-lg btn-danger"  disabled="true">Canceled</button>
+                <button #cancel *ngIf="booking.numberOfTickets>0&&!(getTravelStatus(booking.departureDate))" class="btn btn-lg btn-danger" (click)="cancleAllTickets(booking.pnr)">Cancel</button>
+            </div>
+            </div>
+        </li>
+    </ul>
+</div>

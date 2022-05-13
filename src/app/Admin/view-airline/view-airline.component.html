@@ -1,0 +1,23 @@
+
+<div class="container">
+    <h1>Airlines</h1>
+    <ul class="responsive-table">
+        <li class="table-header">
+            <div class="col col-2"><b>Airline Name</b></div>
+            <div class="col col-2"><b>Activate/Block</b></div>
+            <div class="col col-2"><b>View Flight</b></div>
+        </li>
+        <li class="table-row" *ngIf="airlines==undefined"><div><h3>Loading Data..</h3></div></li>
+        <li class="table-row" *ngIf="airlines?.length==0"><div><h3>No Records.</h3></div></li>
+        <li class="table-row" *ngFor="let airline of airlines">
+            <div class="col col-2" data-label="Airline Name">{{airline.airlineName}}</div>
+            <div class="col col-2" data-label="Activate/Block">
+                <button *ngIf="airline.isActive==true" class="btn btn-lg btn-danger" (click)="block(airline.id)">Block Airline</button>
+                <button *ngIf="airline.isActive==false" class="btn btn-lg btn-success" (click)="activate(airline.id)">Activate Airline</button>
+            </div>
+            <div class="col col-2" data-label="View Flights">
+                <button class="btn btn-lg btn-primary" (click)="viewFlights(airline.id)">View Flights</button>
+            </div>
+        </li>
+    </ul>
+</div>

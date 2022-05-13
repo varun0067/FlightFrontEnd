@@ -1,0 +1,39 @@
+<app-admin-nav></app-admin-nav>
+<div class="container">
+    <h2>Flight List</h2>
+    <ul class="responsive-table">
+        <li class="table-header">
+            <div class="col col-1">Flight Number</div>
+            <div class="col col-1">Departure</div>
+            <div class="col col-1">Destination</div>
+            <div class="col col-1">Schedule Days</div>
+            <div class="col col-1">Departure Time</div>
+            <div class="col col-1">Business Seats</div>
+            <div class="col col-1">Economy Seats</div>
+            <div class="col col-1">Ticket Cost</div>
+            <!-- <div class="col col-1">Delete Flight</div> -->
+            <div class="col col-1">Edit Flight</div>
+        </li>
+        <li class="table-row" *ngIf="flights==undefined"><div><h3>Loading Data..</h3></div></li>
+        <li class="table-row" *ngIf="flights?.length==0"><div><h3>No Records Found.</h3></div></li>
+        <li class="table-row" *ngFor="let flight of flights">
+            <div class="col col-1" data-label="Filght Number">{{flight.flightNumber}}</div>
+            <div class="col col-1" data-label="Departure">{{flight.departure}}</div>
+            <div class="col col-1" data-label="Destination">{{flight.destination}}</div>
+            <div *ngIf="flight.scheduleDays==0" class="col col-1" data-label="Schedule Days">Daily</div>
+            <div *ngIf="flight.scheduleDays==1" class="col col-1" data-label="Schedule Days">WeekDays</div>
+            <div *ngIf="flight.scheduleDays==2" class="col col-1" data-label="Schedule Days">WeekEnds</div>
+            <div class="col col-1" *ngIf="flight.departureTime.minutes==0" data-label="Departure Time">{{flight.departureTime.hours}}:{{flight.departureTime.minutes}}0</div>
+            <div class="col col-1" *ngIf="flight.departureTime.minutes!=0" data-label="Departure Time">{{flight.departureTime.hours}}:{{flight.departureTime.minutes}}</div>
+            <div class="col col-1" data-label="Business Seats">{{flight.numberOfBusinessClassSeats}}</div>
+            <div class="col col-1" data-label="Economy Seats">{{flight.numberOfEconomyClassSeats}}</div>
+            <div class="col col-1" data-label="Ticket Cost">{{flight.ticketCost}}</div>
+            <!-- <div class="col col-1" data-label="Delete Flight">
+                <button class="btn btn-lg btn-danger" (click)="deleteFlight(flight.flightNumber)">Delete</button>
+            </div> -->
+            <div class="col col-1" data-label="Edit Flight">
+                <button class="btn btn-lg btn-primary" (click)="editFlight(flight.flightNumber)">Edit</button>
+            </div>
+        </li>
+    </ul>
+</div>

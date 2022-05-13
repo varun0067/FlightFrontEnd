@@ -1,0 +1,43 @@
+.form-airline{
+    margin-top: 50px;
+    margin-left: 25px;
+    margin-right: 25px;
+}
+
+.addAirline{
+    background-color: white;//linear-gradient(to left, rgb(45, 92, 149), rgb(184, 209, 226));; 
+    padding: 50px; 
+    border-radius: 1rem;
+    box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.1);
+}
+input{
+    margin-top: 2.5px;
+    margin-bottom: 5px;
+    height: auto;
+    border-radius: 2rem;
+}
+.btn{
+    border-radius: 5rem;
+    letter-spacing: .1rem;
+    padding: 1rem;
+    transition: all 0.2s;
+}
+.h3{
+    color: black;
+    margin-bottom: 30px;;
+}
+h4{
+    color: white;
+}
+p,a{
+    cursor: pointer;
+}
+i{
+    font-size: 20px;
+    cursor: pointer;
+}
+.help-block{
+    border-radius:1rem ;
+    background-color:rgb(238, 231, 231);
+    color:red;
+}

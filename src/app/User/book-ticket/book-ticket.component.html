@@ -1,0 +1,105 @@
+<app-user-nav></app-user-nav>
+<body class="text-center">
+    <main class="form-bookFlight">
+        <form [formGroup]="bookTicket" (ngSubmit)="bookTickets()">
+            <div class="row">
+
+                <div class="addAirline col-md-10 col-md-offset-1">
+                <h1 class="h3 fw-normal">Book Tickets</h1>
+                
+                <div class="row">
+                    <div class="col-md-3">
+                        <input type="text" class="form-control" id="email"  formControlName="email" disabled="true">
+                    </div>
+
+                    <div class="col-md-3">
+                        <input type="text" class="form-control" id="flightNumber"  formControlName="flightNumber" disabled="true">
+                    </div>
+
+                    <div class="col-md-3">
+                        <input type="text" class="form-control" id="departure"  formControlName="departure" disabled="true">
+                    </div>
+
+                    <div class="col-md-3">
+                        <input type="text" class="form-control" id="destination"  formControlName="destination" disabled="true">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <input type="datetime-local" class="form-control" id="departureDate"  formControlName="departureDate" disabled="true">
+                    </div>
+
+                    <div class="col-md-6">
+                        <input type="text" class="form-control" id="ticketCost"  formControlName="ticketCost" disabled="true">
+                    </div>
+                </div>
+                <br>
+                <hr>
+                
+                <div formArrayName="passengers">
+                    
+                    <div *ngFor="let passenger of bookTicket.controls.passengers.controls; let i = index" class="row">
+                        <div>
+                            <h3 class="pull-left">Passenger {{i+1}}</h3>
+                            <button class="btn btn-lg btn-danger pull-right" type="button" (click)="removePassenger(i)">Remove</button>
+                        </div>
+                        
+                        <br><br><br>
+                        <div [formGroupName]="i">
+                            <div class="col-md-4">
+                                <input type="text" class="form-control" id="email"  formControlName="email" placeholder="Email">
+                            </div>
+                            <div class="col-md-4">
+                                <input type="text" class="form-control" id="name"  formControlName="name" placeholder="Name">
+                            </div>
+                            <div class="col-md-4">
+                                <input type="number" class="form-control" id="age"  formControlName="age" placeholder="Age">
+                            </div>
+                            <br><br><br>
+                            <div class="col-md-4">
+                                <select class="form-control" id="gender"  formControlName="gender">
+                                    <option value="" hidden selected>Select Gender</option>
+                                    <option value="male">Male</option>
+                                    <option value="female">Female</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <select class="form-control" id="seatNumber"  formControlName="seatNumber">
+                                    <option value="" hidden selected>Select Seat</option>
+                                    <option *ngFor="let seat of availableTickets; let j=index" value="{{seat}}">{{seat}}</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <select class="form-control" id="meals"  formControlName="meals">
+                                    <option value="" hidden selected>Meals</option>
+                                    <option value="NonVeg">Non-Veg</option>
+                                    <option value="Veg">Veg</option>
+                                </select>
+                            </div>
+                        </div>
+                        <br><br><br>
+                        <hr>
+                    </div>
+                    <br>
+                </div>
+                    
+                    
+                <div class="row">
+                    <button class="btn btn-lg btn-primary pull-left"  type="button" (click)="addPassenger()">Add Passenger</button>
+                </div>
+
+                <div class="row">
+                    <br><br> 
+                    <div class="alert alert-danger" *ngIf="seatError">Please select different seats.</div>
+                </div>
+                    
+                <div class="row">
+                    <button class="btn btn-lg btn-success" [disabled]="bookTicket.invalid" type="submit">Book</button>
+                </div>
+
+            </div>
+        </div>
+        </form>
+    </main>
+</body>

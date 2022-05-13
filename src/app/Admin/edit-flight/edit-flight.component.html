@@ -1,0 +1,112 @@
+<app-admin-nav></app-admin-nav>
+<body class="text-center">
+    <main class="form-flight">
+        <form [formGroup]="editFlightForm" (ngSubmit)="editFlight()">
+            <div class="row">
+
+                <div class="addFlight col-md-8 col-md-offset-2">
+                <h1 class="h3 fw-normal">Edit Flight</h1>
+                
+                <div class="row">
+                    <div class="col-md-6">
+                    <div class="help-block" *ngIf="editFlightForm.controls.flightNumber.touched && editFlightForm.controls.flightNumber.invalid">Flight Number is required.</div>
+                    <input type="text" class="form-control" id="flightNumber"  formControlName="flightNumber" placeholder="Flight Number" >
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="help-block" *ngIf="editFlightForm.controls.airlineId.touched && editFlightForm.controls.airlineId.invalid">Airline is required.</div>
+                        <select class="form-control" id="airlineId"  formControlName="airlineId">
+                            <option value="" hidden selected>Select Airline</option>
+                            <option *ngFor="let airline of airlines" value="{{airline.id}}">{{airline.airlineName}}</option>
+                        </select>
+                    </div>
+                </div>
+                <br>
+                
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="help-block" *ngIf="editFlightForm.controls.departure.touched && editFlightForm.controls.departure.invalid">Departure is required.</div>
+                        <input type="text" class="form-control" id="departure"  formControlName="departure" placeholder="Departure" >
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="help-block" *ngIf="editFlightForm.controls.destination.touched && editFlightForm.controls.destination.invalid">Destination is required.</div>
+                        <input type="text" class="form-control" id="destination"  formControlName="destination" placeholder="Destination" >
+                    </div>
+                </div>
+                <br>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="help-block" *ngIf="editFlightForm.controls.startDate.touched && editFlightForm.controls.startDate.invalid">Start Date is required.</div>
+                        <label>Start Date</label>
+                        <input type="date"
+                         class="form-control" id="startDate"  formControlName="startDate" placeholder="Start Date" >
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="help-block" *ngIf="editFlightForm.controls.endDate.touched && editFlightForm.controls.endDate.invalid">End Date is required.</div>
+                        <label>End Date</label>
+                        <input type="date" class="form-control" id="endDate"  formControlName="endDate" placeholder="End Date" >
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="help-block" *ngIf="editFlightForm.controls.departureTime.touched && editFlightForm.controls.departureTime.invalid">Departure Time is required.</div>
+                        <label>Departure Time</label>
+                        <input type="time" class="form-control" id="departureTime"  formControlName="departureTime" placeholder="Departure Time" >
+                    </div>
+                </div>
+                <br>
+
+
+                <div class="row">
+                    
+
+                    <div class="col-md-6">
+                        <div class="help-block" *ngIf="editFlightForm.controls.scheduleDays.touched && editFlightForm.controls.scheduleDays.invalid">ScheduleDays is required.</div>
+                        <select class="form-control" id="scheduleDays"  formControlName="scheduleDays">
+                            <option value="" hidden selected>Schedule Days</option>
+                            <option value="0">Daily</option>
+                            <option value="1">WeekDays</option>
+                            <option value="2">WeekEnds</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="help-block" *ngIf="editFlightForm.controls.instrumentUsed.touched && editFlightForm.controls.instrumentUsed.invalid">Instrument Used is required.</div>
+                        <input type="text" class="form-control" id="instrumentUsed"  formControlName="instrumentUsed" placeholder="Instrument Used" >
+                    </div>
+                </div>
+                <br>
+
+                <div class="row">
+                    
+                </div>
+                <br>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="help-block" *ngIf="editFlightForm.controls.numberOfBusinessClassSeats.touched && editFlightForm.controls.numberOfBusinessClassSeats.invalid">Number Of Business Class Seats is required.</div>
+                        <input type="number" class="form-control" id="numberOfBusinessClassSeats"  formControlName="numberOfBusinessClassSeats" placeholder="Number Of Business Class Seats" >
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="help-block" *ngIf="editFlightForm.controls.numberOfEconomyClassSeats.touched && editFlightForm.controls.numberOfEconomyClassSeats.invalid">Number Of Economy Class Seats is required.</div>
+                        <input type="number" class="form-control" id="numberOfEconomyClassSeats"  formControlName="numberOfEconomyClassSeats" placeholder="Number Of Economy Class Seats" >
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="help-block" *ngIf="editFlightForm.controls.ticketCost.touched && editFlightForm.controls.ticketCost.invalid">Ticket Cost is required.</div>
+                        <input type="number" class="form-control" id="ticketCost"  formControlName="ticketCost" placeholder="Ticket Cost" >
+                    </div>
+                </div>
+                <br>
+
+                
+                <button class="btn btn-lg btn-success" [disabled]="editFlightForm.invalid" type="submit">Edit</button>
+                </div>
+            </div>
+            <br>
+        </form>
+    </main>
+</body>

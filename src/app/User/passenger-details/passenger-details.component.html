@@ -1,0 +1,29 @@
+<app-user-nav></app-user-nav>
+<div class="container">
+        <h2>Flight List</h2>
+        <ul class="responsive-table">
+            <li class="table-header">
+                <div class="col col-1">Email</div>
+                <div class="col col-1">Name</div>
+                <div class="col col-1">Age</div>
+                <div class="col col-1">Gender</div>
+                <div class="col col-1">Seat Number</div>
+                <div class="col col-1">Meals</div>
+                <div class="col col-1">Status</div>
+            </li>
+            <li class="table-row" *ngIf="passengers==undefined"><div><h3>Loading Data..</h3></div></li>
+            <li class="table-row" *ngIf="passengers?.length==0"><div><h3>No Flight Found on Given Day.</h3></div></li>
+            <li class="table-row" *ngFor="let passenger of passengers">
+                <div class="col col-1" data-label="Email">{{passenger.email}}</div>
+                <div class="col col-1" data-label="Name">{{passenger.name}}</div>
+                <div class="col col-1" data-label="Age">{{passenger.age}}</div>
+                <div class="col col-1" data-label="Gender">{{passenger.gender}}</div>
+                <div class="col col-1" data-label="Seat Number">{{passenger.seatNumber}}</div>
+                <div class="col col-1" data-label="Meals">{{passenger.meals}}</div>
+                <div class="col col-1" data-label="Status" >
+                    <button *ngIf="passenger.bookingStatus=='Booked'" class="btn btn-lg btn-danger"  (click)="cancelSingleTicket(passenger.email)">Cancel Ticket</button>
+                    <button *ngIf="passenger.bookingStatus=='Canceled'" class="btn btn-lg btn-success" disabled="true">Canceled</button>
+                </div>
+            </li>
+        </ul>
+    </div>
